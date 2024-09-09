@@ -1,0 +1,15 @@
+*{
+    background-color: burlywood;
+}
+
+.flex-grid {
+    display: flex;
+    justify-content: space-between;
+}
+
+.box {
+    width: 20px;
+    height: 20px;
+    background: rgba(0,0,0,255);
+    opacity: 0.1;
+}
