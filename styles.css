@@ -1,5 +1,5 @@
 *{
-    background-color: burlywood;
+    background-color: rgb(255, 214, 160);
 }
 
 .flex-grid {
@@ -10,6 +10,21 @@
 .box {
     width: 20px;
     height: 20px;
-    background: rgba(0,0,0,255);
+    background-color: rgb(0,0,0);
     opacity: 0.1;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #fff6f1;
+    border: 2px solid #cbcbcb;
+    color: #030303;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button.active {
+    background-color: #333;
+    color: #94e2ec;
+    border: 2px solid #000;
 }
