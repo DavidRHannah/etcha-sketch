@@ -1,19 +1,56 @@
-let theme = "fall";
+let theme = "gray";
+let overlap = false;
+let progressive = false;
+
+const connectSettingsButtons = function(){
+    const resetBtn = document.getElementById("resetBtn");
+    resetBtn.addEventListener("click", ()=>{
+        populateGrid(30, 100);
+        connectSeasonButtons();
+        attachMouseoverListener();
+    });
+
+    const randomBtn = document.getElementById("randomBtn");
+    randomBtn.addEventListener("click", ()=>{
+        theme="random";
+    });
+    
+    const overlapCheck = document.getElementById("overlap");
+    overlapCheck.addEventListener("change", ()=>{
+        if (overlapCheck.checked){
+            overlap = true;
+        } else{
+            overlap = false;
+        }
+    });
+
+    const progressiveCheck = document.getElementById("progressive");
+    progressiveCheck.addEventListener("change",()=>{
+        if (progressiveCheck.checked){
+            progressive = true;
+        } else{
+            progressive = false;
+        }
+    });
+}
 
 const connectSeasonButtons = function(){
+    const grayBtn = document.getElementById("grayScaleBtn");
     const fallBtn = document.getElementById("fallBtn");
     const winterBtn = document.getElementById("winterBtn");
     const springBtn = document.getElementById("springBtn");
     const summerBtn = document.getElementById("summerBtn");
 
-    fallBtn.addEventListener("click", ()=>{ theme = "fall"; });
-    winterBtn.addEventListener("click", ()=>{ theme = "winter"; });
-    springBtn.addEventListener("click", ()=>{ theme = "spring"; });
-    summerBtn.addEventListener("click", ()=>{ theme = "summer"; });
+    grayBtn.addEventListener("click", ()=>{theme = "gray";});
+    fallBtn.addEventListener("click", ()=>{ theme = "fall";});
+    winterBtn.addEventListener("click", ()=>{ theme = "winter";});
+    springBtn.addEventListener("click", ()=>{ theme = "spring";});
+    summerBtn.addEventListener("click", ()=>{ theme = "summer";});
 }
 
 const populateGrid = function(rowCount, colCount){
     gridContainerDiv = document.getElementById("grid");
+    gridContainerDiv.innerHTML = "";
     for (let i = 1; i <= rowCount; i++){
         let rowDiv = document.createElement('div');
         rowDiv.id = ('row-'+i);
@@ -28,7 +65,7 @@ const populateGrid = function(rowCount, colCount){
     }
 }
 
-const getRandomColor = function(season){
+const getColor = function(setting){
     const fallPalette = [
         "#FF6F00",  // Burnt Orange
         "#C62828",  // Deep Red
@@ -59,7 +96,11 @@ const getRandomColor = function(season){
     ];
     
     let palette;
-    switch(season.toLowerCase()){
+    switch(setting.toLowerCase()){
+        case "random":
+            return ("#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);}));
+        case "gray":
+            return "#000000";
         case "fall":
             palette = fallPalette;
             break;
@@ -73,7 +114,7 @@ const getRandomColor = function(season){
             palette = springPalette;
     }
 
-    let ranColorIndex = Math.floor(Math.random() * 6);
+    let ranColorIndex = Math.floor(Math.random() * 5);
     var randomColor = palette[ranColorIndex];
 
     return randomColor;
@@ -82,10 +123,28 @@ const getRandomColor = function(season){
 const doHoverEffect = function(){
     s = window.getComputedStyle(this);
     op = s.opacity;
-    if (s.backgroundColor == "rgb(0, 0, 0)"){
-        this.style.backgroundColor = getRandomColor(theme);
+    bg = s.backgroundColor;
+    
+    if (op == 0.1 && bg == "rgb(0, 0, 0)"){
+        this.style.backgroundColor = getColor(theme);
+        this.style.opacity = Math.min(Number(op) + 0.1, 1);
+
+    } else if (op != 0.1) {
+        if (overlap && progressive)
+        {
+            this.style.backgroundColor = getColor(theme);
+            this.style.opacity = Math.min(Number(op) + 0.1, 1);
+        } 
+        else if (progressive)
+        {
+            this.style.opacity = Math.min(Number(op) + 0.1, 1);
+        } 
+        else if (overlap)
+        {
+            this.style.backgroundColor = getColor(theme);
+            this.style.opacity = 0.2;
+        }
     }
-    this.style.opacity = (Number(op) + 0.2);
 }
 
 const attachMouseoverListener = function(){
@@ -96,5 +155,6 @@ const attachMouseoverListener = function(){
 }
 
 populateGrid(30, 100);
+connectSettingsButtons();
 connectSeasonButtons();
 attachMouseoverListener();
