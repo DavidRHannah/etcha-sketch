@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="controls">
-        <div>
+        <div id="button-container">
             <button id="resetBtn">Reset</button>
             <button id="grayScaleBtn">Gray</button>
             <button id="fallBtn">Fall</button>
@@ -17,19 +17,36 @@
             <button id="summerBtn">Summer</button>
             <button id="randomBtn">Random</button>
         </div>
-        <div onselectstart="return false" class="check-container">
-            <input type="checkbox" id="overlap" class="checkbox">
-            <label for="overlap" class="checkbox-label">Overlap</label>
+        <div id="toggles">
+            <div onselectstart="return false" class="checkbox-container">
+                <input type="checkbox" id="overlap" class="checkbox">
+                <label for="overlap" class="checkbox-label">Overlap</label>
+            </div>
+            <div onselectstart="return false" class="checkbox-container">
+                <input type="checkbox" id="progressive" class="checkbox">
+                <label for="progressive" class="checkbox-label">Progressive</label>
+            </div>
+            <div onselectstart="return false" class="checkbox-container">
+                <input type="checkbox" id="custom" class="checkbox">
+                <label for="custom" class="checkbox-label">Custom</label>
+            </div>
         </div>
-        <div onselectstart="return false" class="check-container">
-            <input type="checkbox" id="progressive" class="checkbox">
-            <label for="progressive" class="checkbox-label">Progressive</label>
-        </div>
-    </div>
-    
-    <div id="grid">
         
+        <div class="rgb-container">
+            <label for="redInput" class="number-label red">R</label>
+            <input type="number" id="redInput" class="customColorInput" min="0" max="255" value="0">
+            
+            <label for="greenInput" class="number-label green">G</label>
+            <input type="number" id="greenInput" class="customColorInput" min="0" max="255" value="0">
+            
+            <label for="blueInput" class="number-label blue">B</label>
+            <input type="number" id="blueInput" class="customColorInput" min="0" max="255" value="0">
+            
+            <div id="customColorPreview"></div>
+        </div>
     </div>
+
+    <div id="grid"></div>
         
     <script src="./script.js"></script>
 </body>

@@ -1,11 +1,26 @@
 let theme = "gray";
 let overlap = false;
 let progressive = false;
+let useCustom = false;
+let customColor = "rgb(0,0,0)";
+let red = 0;
+let green = 0;
+let blue = 0;
 
-const connectSettingsButtons = function(){
+const updateCustomColorPreview = function(){
+    const customColorPreview = document.getElementById("customColorPreview");
+    customColorPreview.style.backgroundColor = customColor;
+}
+
+const parseCustomColor = function(){
+    customColor = "rgb(" + red + "," + green + "," + blue + ")";
+    updateCustomColorPreview();
+}
+
+const connectSettingButtons = function(){
     const resetBtn = document.getElementById("resetBtn");
     resetBtn.addEventListener("click", ()=>{
-        populateGrid(30, 100);
+        populateGrid(40, 100);
         connectSeasonButtons();
         attachMouseoverListener();
     });
@@ -31,6 +46,48 @@ const connectSettingsButtons = function(){
         } else{
             progressive = false;
         }
+    });
+
+    const customColorCheck = document.getElementById("custom");
+    customColorCheck.addEventListener("change",()=>{
+        if (customColorCheck.checked) {
+            useCustom = true;
+        } else {
+            useCustom = false;
+        }
+    });
+
+    const rInput = document.getElementById("redInput");
+    const gInput = document.getElementById("greenInput");
+    const bInput = document.getElementById("blueInput");
+    
+    rInput.addEventListener("change", ()=>{
+        red = Number(rInput.value)
+        if (red > 255){
+            red = 255
+        }else if (red < 0){
+            red = 0
+        }
+        parseCustomColor();
+    });
+    gInput.addEventListener("change", ()=>{
+        green = Number(gInput.value)
+        if (green > 255){
+            green = 255
+        }else if (green < 0){
+            green = 0
+        }
+        console.log(green);
+        parseCustomColor();
+    });
+    bInput.addEventListener("change", ()=>{
+        blue = Number(bInput.value)
+        if (blue > 255){
+            blue = 255
+        }else if (blue < 0){
+            blue = 0
+        }
+        parseCustomColor();
     });
 }
 
@@ -95,6 +152,10 @@ const getColor = function(setting){
         "#81D4FA"   // Sky Blue
     ];
     
+    if (useCustom){
+        return customColor;
+    }
+
     let palette;
     switch(setting.toLowerCase()){
         case "random":
@@ -154,7 +215,7 @@ const attachMouseoverListener = function(){
     }
 }
 
-populateGrid(30, 100);
-connectSettingsButtons();
+populateGrid(40, 100);
+connectSettingButtons();
 connectSeasonButtons();
 attachMouseoverListener();
