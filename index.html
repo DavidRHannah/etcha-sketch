@@ -7,6 +7,26 @@
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+    <div id="controls">
+        <div>
+            <button id="resetBtn">Reset</button>
+            <button id="grayScaleBtn">Gray</button>
+            <button id="fallBtn">Fall</button>
+            <button id="winterBtn">Winter</button>
+            <button id="springBtn">Spring</button>
+            <button id="summerBtn">Summer</button>
+            <button id="randomBtn">Random</button>
+        </div>
+        <div onselectstart="return false" class="check-container">
+            <input type="checkbox" id="overlap" class="checkbox">
+            <label for="overlap" class="checkbox-label">Overlap</label>
+        </div>
+        <div onselectstart="return false" class="check-container">
+            <input type="checkbox" id="progressive" class="checkbox">
+            <label for="progressive" class="checkbox-label">Progressive</label>
+        </div>
+    </div>
+    
     <div id="grid">
         
     </div>
