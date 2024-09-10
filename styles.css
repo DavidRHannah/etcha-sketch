@@ -7,11 +7,20 @@ body{
 
 #controls{
     display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+#toggles{
+    display: flex;
+    flex-wrap: wrap;
+}
+#button-container{
+    display:flex;
+    flex-wrap: wrap;
 }
 
 .flex-grid {
     display: flex;
-    justify-content: space-between;
 }
 
 .box {
@@ -24,7 +33,7 @@ body{
 button {
     padding: 10px 20px;
     background-color: #fff6f1;
-    border: 2px solid #cbcbcb;
+    border: 1px solid #cbcbcb;
     color: #030303;
     cursor: pointer;
     font-size: 16px;
@@ -33,26 +42,52 @@ button {
 button.active {
     background-color: #333;
     color: #94e2ec;
-    border: 2px solid #000;
+    border: 1px solid #000;
 }
 
 input {
     padding: 10px 20px;
     background-color: #fff6f1;
-    border: 2px solid #cbcbcb;
+    border: 1px solid #cbcbcb;
     color: #030303;
     cursor: pointer;
     font-size: 16px;
 }
 
-.check-container {
+.checkbox-container {
     display: flex;
     align-items: center;
-    font-family: Arial, sans-serif;
     padding: 10px 20px;
     background-color: #fff6f1;
-    border: 2px solid #cbcbcb;
+    border: 1px solid #cbcbcb;
     color: #030303;
+}
+
+.rgb-container {
+    display: flex;
+    background-color: #cbcbcb;
+    min-width: none;
+}
+
+.number-label{
+    padding: 10px 10px;
+    border: 1px solid #cbcbcb;
+    color: white;
+}
+.number-label.red{
+    background-color: red;
+}
+.number-label.green{
+    background-color: green;
+}
+.number-label.blue{
+    background-color: blue;
+}
+
+#customColorPreview{
+    border: 1px solid #cbcbcb;
+    background-color: white;
+    padding: 10px 20px;
 }
 
 .checkbox {
